@@ -14,24 +14,25 @@ Here are a few reasons why developers are choosing VisiUI:
 - **Editable and Customizable**: All components can be edited to fit your specific use case, ensuring flexibility and adaptability.
 - **Copy-Paste Simplicity**: No need to install anything yet—simply browse through the docs, copy the code you need, and paste it into your project.
 - **Future-proof**: While you can copy-paste components now, VisiUI is actively being developed, and future releases will include npm packages for smoother integration.
-  
+
 ## How to Use VisiUI Components
 
 For now, using VisiUI is as simple as finding the component you need in the documentation, copying the code, and pasting it directly into your React project.
 
 The code:
+
 ```jsx
-import React from 'react';
+import React from "react";
 
 export const Button = ({ onClick, children }) => {
   return (
     <button
       style={{
-        padding: '10px 20px',
-        backgroundColor: '#007bff',
-        color: '#fff',
-        border: 'none',
-        borderRadius: '4px',
+        padding: "10px 20px",
+        backgroundColor: "#007bff",
+        color: "#fff",
+        border: "none",
+        borderRadius: "4px",
       }}
       onClick={onClick}
     >
@@ -39,26 +40,24 @@ export const Button = ({ onClick, children }) => {
     </button>
   );
 };
-
 ```
 
 How you can use it:
 
 ```jsx
-import { Button } from './path-to-your-components/Button';
+import { Button } from "./path-to-your-components/Button";
 
 function MyApp() {
   return (
     <div>
       <h1>Hello, VisiUI!</h1>
-      <Button onClick={() => alert('You clicked me!')}>Click Me</Button>
+      <Button onClick={() => alert("You clicked me!")}>Click Me</Button>
     </div>
   );
 }
 
 export default MyApp;
 ```
-
 
 ## Contributing to VisiUI
 

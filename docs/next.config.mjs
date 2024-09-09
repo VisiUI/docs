@@ -1,4 +1,4 @@
-import createNextDocsMDX from 'next-docs-mdx/config';
+import createNextDocsMDX from "next-docs-mdx/config";
 
 const withMDX = createNextDocsMDX();
 
