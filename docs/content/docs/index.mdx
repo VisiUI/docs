@@ -19,7 +19,30 @@ Here are a few reasons why developers are choosing VisiUI:
 
 For now, using VisiUI is as simple as finding the component you need in the documentation, copying the code, and pasting it directly into your React project.
 
-Here’s a basic example:
+The code:
+```jsx
+import React from 'react';
+
+export const Button = ({ onClick, children }) => {
+  return (
+    <button
+      style={{
+        padding: '10px 20px',
+        backgroundColor: '#007bff',
+        color: '#fff',
+        border: 'none',
+        borderRadius: '4px',
+      }}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+};
+
+```
+
+How you can use it:
 
 ```jsx
 import { Button } from './path-to-your-components/Button';
@@ -35,6 +58,7 @@ function MyApp() {
 
 export default MyApp;
 ```
+
 
 ## Contributing to VisiUI
 
