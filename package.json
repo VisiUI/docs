@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "fumadocs-typescript": "^2.1.0",
+    "lucide-react": "^0.439.0",
     "next": "14.0.4",
     "next-docs-mdx": "7.1.2",
     "next-docs-ui": "7.1.2",
