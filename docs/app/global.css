@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "InterRegular";
+    src: url('../app/assets/fonts/Inter-Regular.otf');
+}
+
+body {
+    font-family: "InterRegular";
+}
