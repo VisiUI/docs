@@ -1,29 +1,26 @@
-# Documentation Repository for VisiUI
+# docs
 
-This repository contains the files for the documentation of **VisiUI**. The documentation includes detailed information about each component, usage guidelines, and other in-depth resources.
+This is a Next.js application generated with
+[Create Next Docs](https://github.com/fuma-nama/next-docs).
 
-## Purpose
+Run development server:
 
-The purpose of this repository is to provide a centralized location for maintaining and updating the project's documentation. This includes:
-- Detailed documentation for each component.
-- Usage examples and configuration guidelines.
-- Additional resources and references.
+```bash
+npm run dev
+# or
+pnpm dev
+# or
+yarn dev
+```
 
-## Structure
+Open http://localhost:3000 with your browser to see the result.
 
-- **/docs**: Contains the markdown files and assets for the documentation site.
-- **/assets**: Includes any static files used by the documentation site (e.g., images, stylesheets).
+## Learn More
 
-## Social
+To learn more about Next.js and Next Docs, take a look at the following
+resources:
 
-Slack: [Slack invite](https://join.slack.com/t/nuovaareadila-6ll7179/shared_invite/zt-2oge4h1vn-J18RupLnaPKbmgF_AnhuSw)
-
-Discord: [Discord Invite](https://discord.gg/37V4UpkgRv)
-
-## Contributing 
-
-For detailed contributing guidelines, refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file.
-
-## License
-
-This documentation is licensed under the [MIT License](LICENSE).
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
+  features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Next Docs](https://next-docs-zeta.vercel.app) - learn about Next Docs
