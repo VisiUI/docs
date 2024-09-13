@@ -1,4 +1,4 @@
-# Contributing to [Your Project Name]
+# Contributing to VisiUI Docs
 
 First of all, thank you for taking the time to contribute! 🎉 The following is a set of guidelines for contributing to this project on GitHub. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
 
