@@ -3,7 +3,7 @@
 import React, { useState, ReactNode } from "react";
 import { Copy, Check } from "lucide-react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { vscDarkPlus, vs } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 interface StyledContainerProps {
   code: string;
@@ -12,12 +12,12 @@ interface StyledContainerProps {
   title?: string;
 }
 
-const StyledContainer: React.FC<StyledContainerProps> = ({
+export default function StyledContainer({
   code,
   children,
   className = "",
   title,
-}) => {
+}: StyledContainerProps) {
   const [activeTab, setActiveTab] = useState("preview");
   const [copied, setCopied] = useState(false);
 
@@ -30,35 +30,35 @@ const StyledContainer: React.FC<StyledContainerProps> = ({
 
   return (
     <div
-      className={`bg-[#1e1e1e] text-white rounded-lg w-full max-w-3xl ${className}`}
+      className={`bg-background text-foreground rounded-lg w-full max-w-3xl ${className}`}
     >
       {title && (
-        <div className="px-4 py-2 border-b border-gray-700">
+        <div className="px-4 py-2 border-b border-border">
           <h3 className="text-lg font-semibold">{title}</h3>
         </div>
       )}
       <div className="flex justify-between items-center p-4">
         <div className="flex space-x-2">
           <button
-            className={`px-3 py-1 rounded ${activeTab === "preview" ? "bg-[#2d2d2d] text-white" : "text-gray-400"}`}
+            className={`px-3 py-1 rounded ${activeTab === "preview" ? "bg-secondary text-secondary-foreground" : "text-muted-foreground"}`}
             onClick={() => setActiveTab("preview")}
           >
             Preview
           </button>
           <button
-            className={`px-3 py-1 rounded ${activeTab === "code" ? "bg-[#2d2d2d] text-white" : "text-gray-400"}`}
+            className={`px-3 py-1 rounded ${activeTab === "code" ? "bg-secondary text-secondary-foreground" : "text-muted-foreground"}`}
             onClick={() => setActiveTab("code")}
           >
             Code
           </button>
         </div>
         <div className="flex items-center space-x-2">
-          <button className="text-gray-400" onClick={handleCopy}>
+          <button className="text-muted-foreground" onClick={handleCopy}>
             {copied ? <Check size={18} /> : <Copy size={18} />}
           </button>
         </div>
       </div>
-      <div className="bg-[#2d2d2d] rounded-b-lg">
+      <div className="bg-secondary rounded-b-lg">
         {activeTab === "preview" ? (
           <div className="p-4">{children}</div>
         ) : (
@@ -67,7 +67,8 @@ const StyledContainer: React.FC<StyledContainerProps> = ({
               language="tsx"
               style={vscDarkPlus}
               customStyle={{
-                background: "#1e1e1e", 
+                background: "var(--background)", 
+                color: "var(--foreground)",
                 padding: "20px", 
                 borderRadius: "0 0 8px 8px",
                 margin: 0,
@@ -85,6 +86,4 @@ const StyledContainer: React.FC<StyledContainerProps> = ({
       </div>
     </div>
   );
-};
-
-export default StyledContainer;
+}
