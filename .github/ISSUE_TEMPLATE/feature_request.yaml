@@ -1,5 +1,12 @@
 ---
 name: "Feature Proposal"
+body:
+- type: markdown
+  attributes:
+    value: "Feature request"
+- type: textarea
+  attributes:
+    label: "What's the feature?"
 description: "Submit a suggestion for a new feature."
 title: "[feature]: "
 labels: 
