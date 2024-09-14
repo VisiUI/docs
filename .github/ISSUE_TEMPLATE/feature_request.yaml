@@ -1,56 +1,51 @@
 ---
 name: "Feature Proposal"
-body:
-- type: markdown
-  attributes:
-    value: "Feature request"
-- type: textarea
-  attributes:
-    label: "What's the feature?"
 description: "Submit a suggestion for a new feature."
 title: "[feature]: "
 labels: 
   - enhancement
   - feature-request
+assignees: ""
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Thank you for contributing!
+
+        Before creating this issue, please check if an existing feature request already exists. If you're unsure whether it's a bug or a feature request, consider opening a discussion instead: [Discussion Forum](https://github.com/VisiUI/docs/discussions/categories/general)
+
+  - type: textarea
+    id: proposal-summary
+    attributes:
+      label: "Summary of the Proposal"
+      description: "Describe the feature you'd like to see implemented."
+      placeholder: "This feature would improve the library by..."
+    validations:
+      required: true
+
+  - type: input
+    id: related-components
+    attributes:
+      label: "Related Components (if applicable)"
+      description: "Are any existing components impacted by this feature?"
+      placeholder: "e.g., Dropdown, Tooltip..."
+
+  - type: textarea
+    id: additional-information
+    attributes:
+      label: "Additional Information"
+      description: "Add any other context or resources (screenshots, links, etc.) relevant to this feature."
+      placeholder: "Additional context or examples..."
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "Checklist before submitting"
+      description: "By submitting this request, you confirm that you've followed our [Contribution Guidelines](https://github.com/VisiUI/docs/blob/main/CONTRIBUTING.md)."
+      options:
+        - label: "I've reviewed the documentation for this feature"
+          required: true
+        - label: "I've checked for existing issues and pull requests"
+          required: true
 ---
-
-### Thank you for contributing!
-
-Before creating this issue, please check if an existing feature request already exists. If you're unsure whether it's a bug or a feature request, consider opening a discussion instead: [Discussion Forum](https://github.com/VisiUI/docs/discussions/categories/general)
-
----
-
-### Summary of the Proposal
-
-**Describe the feature you'd like to see implemented.**
-
-- **Placeholder:** This feature would improve the library by...
-- **Required:** Yes
-
----
-
-### Related Components (if applicable)
-
-**Are any existing components impacted by this feature?**
-
-- **Placeholder:** e.g., Dropdown, Tooltip...
-- **Required:** No
-
----
-
-### Additional Information
-
-**Add any other context or resources (screenshots, links, etc.) relevant to this feature.**
-
-- **Placeholder:** Additional context or examples...
-- **Required:** No
-
----
-
-### Checklist before submitting
-
-By submitting this request, you confirm that you've followed our [Contribution Guidelines](https://github.com/VisiUI/docs/blob/main/CONTRIBUTING.md).
-
-- [ ] I've reviewed the documentation for this feature.
-- [ ] I've checked for existing issues and pull requests.
-
