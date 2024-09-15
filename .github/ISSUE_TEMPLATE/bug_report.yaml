@@ -1,0 +1,84 @@
+name: "Bug Report"
+description: "Submit a bug you've encountered."
+title: "[bug]: "
+labels:
+  - bug
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### We appreciate your feedback in reporting this bug. Before continuing, make sure to search both open and closed issues to avoid duplicates.
+
+  - type: markdown
+    attributes:
+      value: |
+        #### Unsure if this is a bug? Consider starting a discussion instead:
+        - [Discussion Forum](https://github.com/VisiUI/docs/discussions/categories/general)
+
+  - type: textarea
+    id: bug-details
+    attributes:
+      label: "Bug Description"
+      description: "Clearly describe the issue you're experiencing. If you're planning to submit a fix, mention it here."
+      placeholder: "Provide a clear and concise bug description..."
+    validations:
+      required: true
+
+  - type: input
+    id: impacted-components
+    attributes:
+      label: "Impacted Components"
+      description: "List any components that are affected by this bug."
+      placeholder: "e.g., Button, Input..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-reproduce
+    attributes:
+      label: "Steps to Reproduce"
+      description: "Provide detailed steps to replicate the bug."
+      placeholder: |
+        1. Navigate to '...'
+        2. Perform '...'
+        3. Observe the issue
+    validations:
+      required: true
+
+  - type: input
+    id: reproduction-link
+    attributes:
+      label: "Link to Reproduction"
+      description: |
+        "Please provide a minimal reproduction using CodeSandbox or StackBlitz. Alternatively, link to a GitHub repository if applicable. Issues without a reproduction may be closed."
+      placeholder: "Provide link to CodeSandbox/StackBlitz..."
+    validations:
+      required: false
+
+  - type: textarea
+    id: error-logs
+    attributes:
+      label: "Error Logs"
+      description: "If available, paste any relevant logs from the console or server."
+      render: bash
+
+  - type: textarea
+    id: system-environment
+    attributes:
+      label: "System Information"
+      description: "List the operating system, browser, or any other relevant environment details."
+      placeholder: "e.g., OS: macOS, Browser: Chrome..."
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: submission-terms
+    attributes:
+      label: "Before submitting"
+      description: "By submitting this issue, you agree to follow our [Contribution Guidelines](https://github.com/VisiUI/docs/blob/main/CONTRIBUTING.md)."
+      options:
+        - label: "I have reviewed the relevant documentation and troubleshooting steps."
+          required: true
+        - label: "I have searched for duplicate issues."
+          required: true
