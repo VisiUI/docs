@@ -3,7 +3,6 @@ description: "Submit a bug you've encountered."
 title: "[bug]: "
 labels:
   - bug
-assignees: ""
 
 body:
   - type: markdown
