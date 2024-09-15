@@ -6,7 +6,7 @@ export const runtime = 'edge'
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
   const title = searchParams.get('title') || 'VisiUI'
-  const description = searchParams.get('description') || 'Create faster and better websites'
+  const description = searchParams.get('description') || 'Create faster and better UI'
 
   const fontData = await fetch(
     new URL('/app/api/og/Inter-Regular.ttf', import.meta.url),
