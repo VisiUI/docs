@@ -10,11 +10,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Docs",
-  description: "There you can find all the VisiUI's components with Preview, Code, Usage Methods and Usage",
+  description: "There you can find all the VisiUI's React components (that you can copy and paste) with Preview, Code, Usage Methods and Usage",
   icons: "https://raw.githubusercontent.com/VisiUI/VisiUI/main/public/visiui8.png",
   openGraph: {
     title: "VisiUI Docs",
-    description: "There you can find all the VisiUI's components with Preview, Code, Usage Methods and Usage",
+    description: "There you can find all the VisiUI's React components (that you can copy and paste) with Preview, Code, Usage Methods and Usage",
     url: "https://docs-visi-ui.vercel.app/docs",
     siteName: "VisiUI Docs",
     images: [
