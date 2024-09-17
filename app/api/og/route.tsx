@@ -74,7 +74,7 @@ export async function GET(req: NextRequest) {
               gap: '20px',
             }}
           >
-            {['Contact Form', 'Search Bar', 'Code Window'].map((comp, i) => (
+            {['Navbar', 'Search Bar', 'Contact Form'].map((comp, i) => (
               <div
                 key={i}
                 style={{
