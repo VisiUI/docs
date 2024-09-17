@@ -4,7 +4,6 @@ title: Navbar
 
 import StyledContainer from '../../../../app/Components/StyledContainer';
 import Navbar from '../../../../app/Components/Sections/Navbar';
-import CodeBlock from '../../../../app/DocsComponents/CodeBlock';
 
 ## Component
 
@@ -148,67 +147,61 @@ export default function Navbar() {
 </StyledContainer>
 
 ### For Dark - Light Mode
+`ThemeContext.tsx`:
 
-<CodeBlock 
-    fileName='ThemeContext'
-    fileExtension='tsx'
-    code={`'use client';
-    
+```tsx
+'use client';
+  
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 type Theme = 'light' | 'dark';
 
 interface ThemeContextType {
-  theme: Theme;
-  toggleTheme: () => void;
+theme: Theme;
+toggleTheme: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>('dark');
+const [theme, setTheme] = useState<Theme>('dark');
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as Theme | null;
-    if (savedTheme) {
-      setTheme(savedTheme);
-    }
-  }, []);
+useEffect(() => {
+  const savedTheme = localStorage.getItem('theme') as Theme | null;
+  if (savedTheme) {
+    setTheme(savedTheme);
+  }
+}, []);
 
-  useEffect(() => {
-    document.documentElement.classList.toggle('dark', theme === 'dark');
-    localStorage.setItem('theme', theme);
-  }, [theme]);
+useEffect(() => {
+  document.documentElement.classList.toggle('dark', theme === 'dark');
+  localStorage.setItem('theme', theme);
+}, [theme]);
 
-  const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
-  };
+const toggleTheme = () => {
+  setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+};
 
-  return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+return (
+  <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    {children}
+  </ThemeContext.Provider>
+);
 };
 
 export const useTheme = () => {
-  const context = useContext(ThemeContext);
-  if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-  return context;
-};`}
-></CodeBlock>
+const context = useContext(ThemeContext);
+if (context === undefined) {
+  throw new Error('useTheme must be used within a ThemeProvider');
+}
+return context;
+};
+```
+`layout.tsx`:
 
-
-
-<CodeBlock  fileName='layout'
-    fileExtension='tsx'
-    className='mt-11'
-    code={`import ThemeProviders from 'your-path-to-ThemeContext'
-
+```tsx
 export default function Layout({ children }: { children: ReactNode }) {
-   return (
+  return (
     <html lang="en" className={inter.className}>
       <body>
         <ThemeProvider>
@@ -217,8 +210,8 @@ export default function Layout({ children }: { children: ReactNode }) {
       </body>
     </html>
   );
-}`}>
-</CodeBlock>
+}
+```
 
 ### Usage Methods
 
