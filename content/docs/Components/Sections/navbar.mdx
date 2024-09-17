@@ -1,0 +1,232 @@
+---
+title: Navbar
+---
+
+import StyledContainer from '../../../../app/Components/StyledContainer';
+import Navbar from '../../../../app/Components/Sections/Navbar';
+import CodeBlock from '../../../../app/DocsComponents/CodeBlock';
+
+## Component
+
+<StyledContainer code={`"use client"
+import { useState, useEffect, useRef } from 'react'
+import { Menu, Search, X } from 'lucide-react'
+import Link from 'next/link'
+
+export default function Navbar() {
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const mobileMenuRef = useRef<HTMLDivElement>(null)
+
+  const toggleSearch = () => setIsSearchOpen(!isSearchOpen)
+  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen)
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
+        setIsMobileMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleOutsideClick)
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick)
+    }
+  }, [])
+
+  const navItems = [
+    { name: 'Home', href: '/' },
+    { name: 'Products', href: '/products' },
+    { name: 'About', href: '/about' },
+    { name: 'Contact', href: '/contact' },
+  ]
+
+  return (
+    <nav className="bg-white shadow-sm rounded-xl">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex items-center">
+            <Link href="/" className="flex-shrink-0" prefetch={false}>
+              <svg className="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </Link>
+            <div className="hidden md:block ml-10">
+              <div className="flex items-baseline space-x-4">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                    prefetch={false}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="hidden md:flex items-center">
+            <div className="relative flex items-center">
+              <input
+                type="search"
+                placeholder="Search..."
+                className={\`px-3 py-2 pr-10 rounded-md text-sm bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out text-gray-900 \${ 
+                isSearchOpen ? 'w-64 opacity-100' : 'w-0 opacity-0' 
+                }\`}
+              />
+              <button
+                onClick={toggleSearch}
+                className="p-2 rounded-md text-gray-600 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 absolute right-0"
+                aria-label="Search"
+              >
+                <Search className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+          <div className="md:hidden">
+            <button
+              onClick={toggleMobileMenu}
+              className="p-2 rounded-md text-gray-600 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              aria-label="Open menu"
+            >
+              <Menu className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      <div
+        className={\`fixed inset-y-0 right-0 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out \${ 
+        isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full' 
+        } z-50\`}
+      >
+        <div className="p-6">
+          <div className="flex items-center justify-between mb-8">
+            <Link href="/" className="flex-shrink-0" prefetch={false}>
+              <svg className="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </Link>
+            <button
+              onClick={toggleMobileMenu}
+              className="p-2 rounded-md text-gray-600 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              aria-label="Close menu"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
+          <nav className="space-y-1">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors"
+                prefetch={false}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </nav>
+          <div className="mt-6">
+            <div className="relative">
+              <input
+                type="search"
+                placeholder="Search..."
+                className="w-full px-3 py-2 rounded-md text-sm bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+              />
+              <Search className="absolute right-3 top-2.5 h-4 w-4 text-gray-400" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  )
+}`}>
+    <Navbar />
+</StyledContainer>
+
+### For Dark - Light Mode
+
+<CodeBlock 
+    fileName='ThemeContext'
+    fileExtension='tsx'
+    code={`'use client';
+    
+import React, { createContext, useContext, useState, useEffect } from 'react';
+
+type Theme = 'light' | 'dark';
+
+interface ThemeContextType {
+  theme: Theme;
+  toggleTheme: () => void;
+}
+
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+
+export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [theme, setTheme] = useState<Theme>('dark');
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') as Theme | null;
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (context === undefined) {
+    throw new Error('useTheme must be used within a ThemeProvider');
+  }
+  return context;
+};`}
+></CodeBlock>
+
+
+
+<CodeBlock  fileName='layout'
+    fileExtension='tsx'
+    className='mt-11'
+    code={`import ThemeProviders from 'your-path-to-ThemeContext'
+
+export default function Layout({ children }: { children: ReactNode }) {
+   return (
+    <html lang="en" className={inter.className}>
+      <body>
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}`}>
+</CodeBlock>
+
+### Usage Methods
+
+1. **Pass** `navItems` as a prop to allow customisation of menu links.
+2. **Use a JSON file for `navItems` data** to facilitate editing and extending links.
+3. **Outsource the search component** to a separate component to improve modularity.
+4. **Create a separate** `MobileMenu` component to manage the mobile menu and improve code readability.
+5. **Pass the theme as a prop** and manage it in a higher-level component to make the component more flexible.
+6. **Handle clicks outside the mobile menu in a custom hook** to make the code cleaner and reusable.
+7. **Allow customisation of icons via props** to allow different icons to be used.
+8. **Add a prop to pass callback functions for menu and theme events** to allow customised event handling.

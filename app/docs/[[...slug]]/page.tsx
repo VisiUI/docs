@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { DocsPage, DocsBody } from "next-docs-ui/page";
 import { notFound } from "next/navigation";
 
+
 export default async function Page({
   params,
 }: {

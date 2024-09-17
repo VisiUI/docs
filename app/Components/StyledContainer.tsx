@@ -1,3 +1,5 @@
+// This instead should be used for every component
+
 "use client";
 
 import React, { useState, ReactNode } from "react";
