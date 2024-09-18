@@ -4,6 +4,7 @@ title: Search Bar
 
 import FilterableSearchBar from '../../../app/Components/FilterableSearchBar';
 import StyledContainer from '../../../app/Components/StyledContainer';
+import PackageManagerTabs from '../../../app/Components/package-manager-tabs';
 
 ## Component
 
@@ -151,6 +152,26 @@ export default function FilterableSearchBar() {
 `}>
     <FilterableSearchBar />
 </StyledContainer>
+
+### Dependencies
+
+<PackageManagerTabs 
+   commands={{
+    npm: "i lucide-react",
+    pnpm: "i lucide-react",
+    yarn: "add lucide-react",
+    bun: "i lucide-react"
+  }} 
+/>
+<br />
+<PackageManagerTabs 
+   commands={{
+    npm: "i framer-motion",
+    pnpm: "i framer-motion",
+    yarn: "add framer-motion",
+    bun: "i framer-motion"
+  }} 
+/>
 
 ### Usage Methods
 This component has more usage methods that you could use:

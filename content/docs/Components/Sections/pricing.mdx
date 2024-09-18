@@ -1,0 +1,190 @@
+---
+title: "Pricing Box"
+---
+
+import StyledContainer from '../../../../app/Components/StyledContainer';
+import PricingBoxWithAdvantages from '../../../../app/Components/Sections/PricingAdvantages';
+import PackageManagerTabs from '../../../../app/Components/package-manager-tabs';
+
+
+<StyledContainer code={`"use client"
+
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+
+interface Advantage {
+  icon: React.ReactNode;
+  text: string;
+}
+
+interface PriceBoxProps {
+  title: string;
+  price: number | string;
+  period?: string;
+  advantages?: Advantage[];
+  ctaText?: string;
+  onCtaClick?: () => void;
+  customStyles?: {
+    container?: string;
+    title?: string;
+    price?: string;
+    period?: string;
+    advantageItem?: string;
+    ctaButton?: string;
+  };
+  animationConfig?: {
+    initial?: object;
+    animate?: object;
+    transition?: object;
+  };
+  hoverEffects?: boolean;
+  backgroundEffects?: boolean;
+}
+
+export default function FuturisticPriceBox({
+  title,
+  price,
+  period,
+  advantages = [],
+  ctaText = "Buy Now",
+  onCtaClick,
+  customStyles = {},
+  animationConfig = {},
+  hoverEffects = true,
+  backgroundEffects = true,
+}: PriceBoxProps) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const defaultAnimation = {
+    initial: { opacity: 0, y: 50 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.5 },
+  };
+
+  const animation = {
+    ...defaultAnimation,
+    ...animationConfig,
+  };
+  
+  return (
+    <motion.div
+      className={\`relative w-full max-w-sm h-auto bg-gradient-to-br from-purple-400/10 to-blue-500/10 rounded-2xl p-6 backdrop-blur-md border border-white/20 shadow-xl overflow-hidden \${customStyles.container || ''}\`}
+      {...animation}
+      onHoverStart={() => hoverEffects && setIsHovered(true)}
+      onHoverEnd={() => hoverEffects && setIsHovered(false)}
+    >
+      {hoverEffects && (
+        <div 
+          className="absolute inset-0 bg-gradient-to-r from-purple-500/30 to-blue-500/30 opacity-0 transition-opacity duration-300 ease-in-out z-0" 
+          style={{ opacity: isHovered ? 0.2 : 0 }} 
+        />
+      )}
+      
+      <h2 className={\`text-3xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400 \${customStyles.title || ''}\`}>
+        {title}
+      </h2>
+      
+      <div className="flex items-end mb-6">
+        <span className={\`text-5xl font-bold text-white \${customStyles.price || ''}\`}>
+          {typeof price === 'number' ? \`\${price}\` : price}
+        </span>
+        {period && (
+          <span className={\`text-xl text-gray-300 ml-2 \${customStyles.period || ''}\`}>
+            /{period}
+          </span>
+        )}
+      </div>
+      
+      {advantages.length > 0 && (
+        <ul className="space-y-4 mb-8 ml-[-10px]">
+          {advantages.map((advantage, index) => (
+            <motion.li
+              key={index}
+              className={\`flex items-start text-gray-300 \${customStyles.advantageItem || ''}\`}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <span className="mr-3 text-blue-400 flex-shrink-0 mt-[-5px]">{advantage.icon}</span>
+              <span className="text-sm leading-tight">{advantage.text}</span>
+            </motion.li>
+          ))}
+        </ul>
+      )}
+      
+      <motion.button
+        className={\`w-full py-3 px-6 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 \${customStyles.ctaButton || ''}\`}
+        whileHover={hoverEffects ? { scale: 1.05 } : {}}
+        whileTap={hoverEffects ? { scale: 0.95 } : {}}
+        onClick={onCtaClick}
+      >
+        {ctaText}
+      </motion.button>
+      
+      {backgroundEffects && (
+        <>
+          <div className="absolute -bottom-12 -right-12 w-40 h-40 bg-blue-500 rounded-full filter blur-3xl opacity-20 animate-pulse" />
+          <div className="absolute -top-12 -left-12 w-40 h-40 bg-purple-500 rounded-full filter blur-3xl opacity-20 animate-pulse" />
+        </>
+      )}
+    </motion.div>
+  );
+}
+`}>
+    <PricingBoxWithAdvantages></PricingBoxWithAdvantages>
+</StyledContainer>
+
+### Configuration and Re-usability
+
+```tsx
+import React from 'react';
+import FuturisticPriceBox from './Pricing';
+
+// Advantages array 
+
+const advantages = [
+  { icon: '🚀', text: 'Launch faster with pre-built components' },
+  { icon: '💻', text: 'Easily customizable with modern tools' },
+  { icon: '📦', text: 'Reusable for multiple projects' },
+  { icon: '🔒', text: 'Secure and reliable architecture' },
+  { icon: '🌍', text: 'Global accessibility and performance' }
+];
+
+// Component call 
+
+const PricingBoxWithAdvantages = () => (
+<div className='flex justify-center items-center '>
+    <FuturisticPriceBox 
+        title='Pro Plan' 
+        price={99} 
+        period='month' 
+        advantages={advantages} // Array Calling
+    />
+    </div>
+);
+
+export default PricingBoxWithAdvantages;
+
+```
+
+### Dependencies 
+
+<PackageManagerTabs 
+  commands={{
+    npm: "i framer-motion",
+    pnpm: "i framer-motion",
+    yarn: "add framer-motion",
+    bun: "i framer-motion"
+  }} 
+/>
+
+### Usage Methods
+1. **Pass `advantage` data as props** to make the component more flexible and to allow the inclusion of different advantages.
+2. **Use a JSON file for `advantage` data** to simplify editing and extension of advantage information.
+3. **Outsource animation configurations** to a separate file or custom hook to improve modularity and reusability.
+4. **Create separate components** for the title, price and CTA to improve readability and reusability of the code.
+5. **Add the ability to pass customisable CSS classes as props** to allow easier and more versatile customisation.
+6. **Allow customisation of `ctaTex`t and `onCtaClick` as props** to easily adapt the behaviour of the CTA button.
+7. **Use a context to manage the state of `hoverEffects` and `backgroundEffects`** to avoid passing too many props and make the component more manageable.
+8. **Define default configurations for `animationConfig` and `customStyles`** in a configuration file to facilitate global customisation.
+9. **Add the possibility of disabling hover and background effects via props** for finer control over the visual effects of the component.

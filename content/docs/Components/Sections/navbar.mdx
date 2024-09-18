@@ -4,6 +4,8 @@ title: Navbar
 
 import StyledContainer from '../../../../app/Components/StyledContainer';
 import Navbar from '../../../../app/Components/Sections/Navbar';
+import PackageManagerTabs from '../../../../app/Components/package-manager-tabs';
+
 
 ## Component
 
@@ -228,6 +230,17 @@ export default function Layout({ children }: { children: ReactNode }) {
   );
 }
 ```
+
+### Dependencies
+
+<PackageManagerTabs 
+    commands={{
+    npm: "i lucide-react",
+    pnpm: "i lucide-react",
+    yarn: "add lucide-react",
+    bun: "i lucide-react"
+  }} 
+/>
 
 ### Usage Methods
 
