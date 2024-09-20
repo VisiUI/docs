@@ -1,135 +1,68 @@
 "use client"
 
-import React, { useState } from 'react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { tomorrow, vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { Copy, Check } from 'lucide-react';
+import React, { useState } from 'react'
+import { FileIcon, Copy, Check } from 'lucide-react'
 
-const CodeWindow: React.FC<{ code: string; language: string; className?: string }> = ({
-  code,
-  language,
-  className = 'max-w-3xl mx-auto bg-gray-800 rounded-lg shadow-lg p-4',
-}) => {
-  return (
-    <div className={className}>
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex space-x-2">
-          <span className="w-3 h-3 bg-red-500 rounded-full"></span>
-          <span className="w-3 h-3 bg-yellow-500 rounded-full"></span>
-          <span className="w-3 h-3 bg-green-500 rounded-full"></span>
-        </div>
-      </div>
-      <SyntaxHighlighter
-        language={language}
-        style={tomorrow}
-        className="mt-2 rounded-lg"
-      >
-        {code}
-      </SyntaxHighlighter>
-    </div>
-  );
-};
-
-const CodeWindow2: React.FC<{ previewCode: string }> = ({ previewCode }) => {
-  const [activeTab, setActiveTab] = useState('preview');
-  const [copied, setCopied] = useState(false);
-
-  const codeString = `import React from "react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
-
-interface CodeWindowProps {
-  code: string;
-  language: string;
-  className?: string;
+interface CodeBoxProps {
+  code: string
+  fileName: string
+  fileExtension: string
 }
 
-const CodeWindow: React.FC<CodeWindowProps> = ({
-  code,
-  language,
-  className = "max-w-3xl mx-auto bg-gray-800 rounded-lg shadow-lg p-4",
-}) => {
-  return (
-    <div className={className}>
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex space-x-2">
-          <span className="w-3 h-3 bg-red-500 rounded-full"></span>
-          <span className="w-3 h-3 bg-yellow-500 rounded-full"></span>
-          <span className="w-3 h-3 bg-green-500 rounded-full"></span>
-        </div>
-      </div>
-      <SyntaxHighlighter
-        language={language}
-        style={tomorrow}
-        className="mt-2 rounded-lg"
-      >
-        {code}
-      </SyntaxHighlighter>
-    </div>
-  );
-};
+export default function CodeBox({ code, fileName, fileExtension }: CodeBoxProps) {
+  const [isCopied, setIsCopied] = useState(false)
 
-CodeWindow.defaultProps = {
-  language: "javascript",
-};
+  const getLanguageClass = (extension: string) => {
+    const languageMap: { [key: string]: string } = {
+      js: 'language-javascript',
+      ts: 'language-typescript',
+      jsx: 'language-jsx',
+      tsx: 'language-tsx',
+      html: 'language-html',
+      css: 'language-css',
+      json: 'language-json',
+      md: 'language-markdown',
+      mdx: 'language-markdown',
+      // Add more languages as needed
+    }
+    return languageMap[extension] || 'language-plaintext'
+  }
 
-export default CodeWindow;`;
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(codeString).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
-  };
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(code)
+      setIsCopied(true)
+      setTimeout(() => setIsCopied(false), 2000)
+    } catch (err) {
+      console.error('Failed to copy text: ', err)
+    }
+  }
 
   return (
-    <div className="bg-[#1e1e1e] text-white p-4 rounded-lg w-full max-w-3xl">
-      <div className="flex justify-between items-center mb-4">
-        <div className="flex space-x-2">
-          <button
-            className={`px-3 py-1 rounded ${
-              activeTab === 'preview' ? 'bg-[#2d2d2d] text-white' : 'text-gray-400'
-            }`}
-            onClick={() => setActiveTab('preview')}
-          >
-            Preview
-          </button>
-          <button
-            className={`px-3 py-1 rounded ${
-              activeTab === 'code' ? 'bg-[#2d2d2d] text-white' : 'text-gray-400'
-            }`}
-            onClick={() => setActiveTab('code')}
-          >
-            Code
-          </button>
+    <div className="bg-[#1e1e1e] rounded-lg overflow-hidden font-mono text-sm w-full max-w-2xl">
+      <div className="flex items-center justify-between px-4 py-2 bg-[#2a2a2a] text-[#8b8b8b] border-b border-[#3a3a3a]">
+        <div className="flex items-center gap-2">
+          <FileIcon className="w-4 h-4" aria-hidden="true" />
+          <span>{fileName}.{fileExtension}</span>
         </div>
-        <div className="flex items-center space-x-2">
-          <button className="text-gray-400" onClick={handleCopy}>
-            {copied ? <Check size={18} /> : <Copy size={18} />}
-          </button>
-        </div>
+        <button
+          onClick={copyToClipboard}
+          className="flex items-center gap-1 px-2 py-1 rounded hover:bg-[#3a3a3a] focus:outline-none focus:ring-2 focus:ring-[#4a4a4a] transition-colors"
+          aria-label={isCopied ? "Copied" : "Copy code"}
+        >
+          {isCopied ? (
+            <Check className="w-4 h-4 text-green-500" />
+          ) : (
+            <Copy className="w-4 h-4" />
+          )}
+          <span className="text-xs">{isCopied ? 'Copied!' : 'Copy'}</span>
+        </button>
       </div>
-      <div className="bg-[#2d2d2d] p-4 rounded max-h-[400px] overflow-y-auto">
-        {activeTab === 'preview' ? (
-          <CodeWindow code={previewCode} language="javascript" />
-        ) : (
-          <SyntaxHighlighter
-            language="tsx"
-            style={vscDarkPlus}
-            customStyle={{
-              background: 'transparent',
-              padding: 0,
-              margin: 0,
-            }}
-            wrapLines={true}
-            wrapLongLines={true}
-          >
-            {codeString}
-          </SyntaxHighlighter>
-        )}
+      <div className="p-4 bg-[#1e1e1e] overflow-x-auto">
+        <pre className={`text-[#d4d4d4] ${getLanguageClass(fileExtension)}`}>
+          <code>{code}</code>
+        </pre>
       </div>
     </div>
-  );
-};
-
-export default CodeWindow2;
+  )
+}
