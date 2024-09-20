@@ -3,33 +3,35 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
+// TODO: Adding light mode theme for the component (optimized for light mode)
+
 interface Advantage {
   icon: React.ReactNode;
   text: string;
 }
 
 interface PriceBoxProps {
-  title: string;
-  price: number | string;
-  period?: string;
-  advantages?: Advantage[];
-  ctaText?: string;
-  onCtaClick?: () => void;
-  customStyles?: {
-    container?: string;
-    title?: string;
-    price?: string;
+    title: string;
+    price: number | string;
     period?: string;
-    advantageItem?: string;
-    ctaButton?: string;
-  };
-  animationConfig?: {
-    initial?: object;
-    animate?: object;
-    transition?: object;
-  };
-  hoverEffects?: boolean;
-  backgroundEffects?: boolean;
+    advantages?: Advantage[];
+    ctaText?: string;
+    onCtaClick?: () => void;
+    customStyles?: {
+      container?: string;
+      title?: string;
+      price?: string;
+      period?: string;
+      advantageItem?: string;
+      ctaButton?: string;
+    };
+    animationConfig?: {
+      initial?: object;
+      animate?: object;
+      transition?: object;
+    };
+    hoverEffects?: boolean;
+    backgroundEffects?: boolean;
 }
 
 export default function FuturisticPriceBox({
