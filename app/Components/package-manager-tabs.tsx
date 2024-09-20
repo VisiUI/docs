@@ -3,16 +3,20 @@
 import React, { useState } from 'react'
 import { ClipboardIcon, CheckIcon } from 'lucide-react'
 
+// TODO: Optimize it for light mode
+
+
 const packageManagers = ['npm', 'pnpm', 'yarn', 'bun'] as const
 
 type PackageManager = typeof packageManagers[number]
 
 interface PackageManagerCommand {
-    commands: Record<PackageManager, string>;
+  commands: Record<PackageManager, string>;
 }
 
 export default function PackageManagerTabs({ commands }: PackageManagerCommand) {
-  const [activeTab, setActiveTab] = useState<PackageManager>('npm')
+  const availablePackageManagers = packageManagers.filter(pm => pm in commands)
+  const [activeTab, setActiveTab] = useState<PackageManager>(availablePackageManagers[0])
   const [copied, setCopied] = useState(false)
 
   const currentCommand = commands[activeTab]
@@ -31,7 +35,7 @@ export default function PackageManagerTabs({ commands }: PackageManagerCommand) 
   return (
     <div className="bg-[#1e1e1e] rounded-lg overflow-hidden">
       <div className="flex border-b border-[#2e2e2e]">
-        {packageManagers.map((pm) => (
+        {availablePackageManagers.map((pm) => (
           <button
             key={pm}
             className={`px-4 py-2 text-sm ${
