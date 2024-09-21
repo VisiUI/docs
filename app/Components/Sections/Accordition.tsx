@@ -5,13 +5,13 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 
 interface AccordionItem {
-  title: string
-  content: string
+    title: string
+    content: string
 }
 
 interface ModernAccordionProps {
-  items: AccordionItem[]
-  allowMultiple?: boolean
+    items: AccordionItem[]
+    allowMultiple?: boolean
 }
 
 export default function ModernAccordion({ items, allowMultiple = false }: ModernAccordionProps) {
