@@ -218,6 +218,8 @@ return context;
 `layout.tsx`:
 
 ```tsx
+import ThemeProvider from 'your-path';
+
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={inter.className}>
