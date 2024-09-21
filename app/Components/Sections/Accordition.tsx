@@ -30,7 +30,7 @@ export default function ModernAccordion({ items, allowMultiple = false }: Modern
   return (
     <div className="w-full max-w-2xl mx-auto space-y-2">
       {items.map((item, index) => (
-        <div key={index} className="border border-gray-200 rounded-lg overflow-hidden">
+        <div key={index} className="border-none rounded-lg overflow-hidden">
           <motion.button
             className="w-full text-left p-4 flex justify-between items-center bg-white hover:bg-gray-50 transition-colors duration-200"
             onClick={() => toggleItem(index)}
