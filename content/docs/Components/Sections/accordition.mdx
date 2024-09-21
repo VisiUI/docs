@@ -1,0 +1,133 @@
+---
+title: Accordition
+---
+
+import PackageManagerTabs from '../../../../app/Components/package-manager-tabs';
+import StyledContainer from '../../../../app/Components/StyledContainer';
+import AccorditionData from '../../../../app/Components/Sections/AccorditionData';
+
+<StyledContainer code={`'use client'
+
+import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ChevronDown } from 'lucide-react'
+
+interface AccordionItem {
+    title: string
+    content: string
+}
+
+interface ModernAccordionProps {
+    items: AccordionItem[]
+    allowMultiple?: boolean
+}
+
+export default function ModernAccordion({ items, allowMultiple = false }: ModernAccordionProps) {
+  const [openItems, setOpenItems] = useState<number[]>([])
+
+  const toggleItem = (index: number) => {
+    setOpenItems(prev => {
+      if (allowMultiple) {
+        return prev.includes(index) ? prev.filter(i => i !== index) : [...prev, index]
+      } else {
+        return prev.includes(index) ? [] : [index]
+      }
+    })
+  }
+
+  return (
+    <div className="w-full max-w-2xl mx-auto space-y-2">
+      {items.map((item, index) => (
+        <div key={index} className="border border-gray-200 rounded-lg overflow-hidden">
+          <motion.button
+            className="w-full text-left p-4 flex justify-between items-center bg-white hover:bg-gray-50 transition-colors duration-200"
+            onClick={() => toggleItem(index)}
+            aria-expanded={openItems.includes(index)}
+            aria-controls={\`accordion-content-\${index}\`}
+          >
+            <span className="text-lg font-medium text-gray-900">{item.title}</span>
+            <motion.div
+              animate={{ rotate: openItems.includes(index) ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <ChevronDown className="w-5 h-5 text-gray-500" />
+            </motion.div>
+          </motion.button>
+          <AnimatePresence initial={false}>
+            {openItems.includes(index) && (
+              <motion.div
+                id={\`accordion-content-\${index}\`}
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+              >
+                <div className="p-4 bg-gray-50 text-gray-700">
+                  {item.content}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      ))}
+    </div>
+  )
+}`}>
+    <AccorditionData />
+</StyledContainer>
+
+### Dependencies
+
+<PackageManagerTabs 
+  commands={{
+    npm: "install lucide-react",
+    pnpm: "install lucide-react",
+    yarn: "add lucide-react",
+  }} 
+/>
+
+<br />
+
+<PackageManagerTabs 
+  commands={{
+    npm: "install framer-motion",
+    pnpm: "add framer-motion",
+    yarn: "add framer-motion",
+    bun: "add framer-motion"
+  }} 
+/>
+
+### Configuration and Re-usability
+
+`AccorditionData.tsx`:
+
+```tsx
+import ModernAccordion from 'your-path'
+
+// Questions:
+
+const accordionItems = [
+  {
+    title: "What is React?",
+    content: "React is a JavaScript library for building user interfaces, particularly single-page applications."
+  },
+  {
+    title: "Why use TypeScript with React?",
+    content: "TypeScript adds static typing to JavaScript, which can help catch errors early and improve code quality and maintainability in React projects."
+  },
+  // Add more items as needed
+]
+
+export default function AccorditionData() {
+  return (
+    <div className="p-4">
+    {/**Component Calling*/}
+      <ModernAccordion items={accordionItems} allowMultiple={true} />
+    </div>
+  )
+}
+```
+
+### Usage Methods
+
+{/**Add the usage methods*/}
