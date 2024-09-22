@@ -12,7 +12,7 @@ interface FooterLinkProps {
 const FooterLink: React.FC<FooterLinkProps> = ({ href, children }) => (
   <motion.a
     href={href}
-    className="text-gray-400 hover:text-white transition-colors duration-300 block py-1 no-underline"
+    className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-300 block py-1 no-underline"
     whileHover={{ x: 5 }}
     whileTap={{ scale: 0.95 }}
   >
@@ -28,7 +28,7 @@ interface SocialIconProps {
 const SocialIcon: React.FC<SocialIconProps> = ({ href, children }) => (
   <motion.a
     href={href}
-    className="text-gray-400 hover:text-white transition-colors duration-300 no-underline"
+    className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-300 no-underline"
     whileHover={{ y: -5 }}
     whileTap={{ scale: 0.95 }}
     target="_blank"
@@ -56,7 +56,7 @@ export default function LuxuryModernFooter({
   copyrightText
 }: LuxuryModernFooterProps) {
   return (
-    <footer className="bg-black text-white py-12 px-4 sm:px-6 lg:px-8">
+    <footer className="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-16 mb-8">
           <motion.div
@@ -65,8 +65,8 @@ export default function LuxuryModernFooter({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-white">{brandName}</h2>
-            <p className="text-gray-400 text-sm sm:text-base leading-relaxed">{brandDescription}</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">{brandName}</h2>
+            <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base leading-relaxed">{brandDescription}</p>
             <div className="flex space-x-4 mt-6">
               {socialLinks.map((social, index) => (
                 <SocialIcon key={index} href={social.href}>
@@ -76,7 +76,7 @@ export default function LuxuryModernFooter({
             </div>
           </motion.div>
           <div className="space-y-4">
-            <h3 className="text-lg sm:text-xl font-semibold text-white mb-4">Quick Links</h3>
+            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4">Quick Links</h3>
             <ul className="space-y-2">
               {quickLinks.map((link, index) => (
                 <li key={index}>
@@ -86,7 +86,7 @@ export default function LuxuryModernFooter({
             </ul>
           </div>
           <div className="space-y-4">
-            <h3 className="text-lg sm:text-xl font-semibold text-white mb-4">Resources</h3>
+            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4">Resources</h3>
             <ul className="space-y-2">
               {resourcesLinks.map((link, index) => (
                 <li key={index}>
@@ -96,8 +96,8 @@ export default function LuxuryModernFooter({
             </ul>
           </div>
         </div>
-        <div className="border-t border-gray-800 pt-8 text-center">
-          <p className="text-sm sm:text-base text-gray-400">{copyrightText}</p>
+        <div className="border-t border-gray-200 dark:border-gray-800 pt-8 text-center">
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">{copyrightText}</p>
         </div>
       </div>
     </footer>
