@@ -195,6 +195,33 @@ import LuxuryModernFooter from 'your-path';
 
 ```
 
+### Configuration
+
+`tailwind.config.ts`:
+```ts
+import type { Config } from "tailwindcss";
+
+// Code of the tailwind.config.ts...
+
+const config: Config = {
+  darkMode: "class",
+  // Rest...
+};
+
+```
+
+`tailwind.config.js`:
+```js
+// Rest of the code
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  darkMode: 'class',
+  // Rest...
+};
+
+```
+
 ### Usage Methods
 
 1. **Externalised Configuration**: Externalises footer data into a JSON or API file, making the component more flexible and easily updatable without declaring the data on the call.
